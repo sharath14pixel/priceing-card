@@ -1,0 +1,232 @@
+/**
+ * responsive.css - Responsive Breakpoints (360px, 800px, 1280px),
+ * Mobile Ordering (Popular First), prefers-reduced-motion, and Print Stylesheet.
+ */
+
+/* =====================================================================
+   1. Breakpoints & Layout Adaptations
+   ===================================================================== */
+
+/* Tablet & Mobile Screens (< 1024px) */
+@media (max-width: 1023px) {
+  .pricing-grid {
+    gap: var(--space-lg);
+  }
+
+  .card--popular {
+    transform: scale(1.02);
+  }
+
+  @media (hover: hover) {
+    .card--popular:hover {
+      transform: scale(1.02) translateY(-6px);
+    }
+  }
+}
+
+/* Mobile Screens (< 800px) - Stack Single Column with Popular First */
+@media (max-width: 799px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: var(--space-xl);
+  }
+
+  /* Core Requirement: Popular card orders first on mobile */
+  .card--popular {
+    order: -1;
+    transform: none; /* Reset desktop scale to prevent overflow */
+  }
+
+  @media (hover: hover) {
+    .card--popular:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  .pricing-hero {
+    padding: var(--space-2xl) 0 var(--space-lg);
+  }
+
+  .pricing-hero__subtitle {
+    margin-bottom: var(--space-xl);
+  }
+
+  .toggle-wrapper {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .billing-toggle__btn {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  /* Comparison table sticky first column on mobile scroll */
+  .comparison-table .feature-col {
+    position: sticky;
+    left: 0;
+    background: var(--color-surface);
+    z-index: 5;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    min-width: 140px;
+  }
+
+  [data-theme="dark"] .comparison-table .feature-col {
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .comparison-table .plan-col {
+    min-width: 110px;
+  }
+}
+
+/* Compact Mobile (<= 360px) */
+@media (max-width: 360px) {
+  .container {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+
+  .card {
+    padding: var(--space-xl) var(--space-md) var(--space-md);
+  }
+
+  .billing-toggle__btn {
+    font-size: var(--font-size-xs);
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .badge-discount {
+    display: none; /* Hide mini badge to preserve 44px tap width without text overflow */
+  }
+
+  .price-value {
+    font-size: 2rem;
+  }
+}
+
+/* Large Desktop Screens (>= 1280px & 1920px) */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1240px;
+  }
+
+  .pricing-grid {
+    gap: var(--space-2xl);
+  }
+}
+
+/* =====================================================================
+   2. Reduced Motion Fallback (@media prefers-reduced-motion: reduce)
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .card, 
+  .card:hover, 
+  .card--popular, 
+  .card--popular:hover {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .billing-toggle__pill {
+    transition: none !important;
+  }
+
+  .savings-container {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .faq-chevron {
+    transition: none !important;
+  }
+}
+
+/* =====================================================================
+   3. Print Stylesheet (@media print)
+   ===================================================================== */
+@media print {
+  /* Reset colors to clean high-contrast print layout */
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .site-header,
+  .toggle-wrapper,
+  .theme-toggle-btn,
+  .btn,
+  .faq-section,
+  .skip-link,
+  .tooltip-container {
+    display: none !important;
+  }
+
+  .pricing-hero {
+    padding: 0 0 1rem 0 !important;
+  }
+
+  .pricing-hero__title {
+    color: #000000 !important;
+    font-size: 1.8rem !important;
+  }
+
+  .pricing-grid {
+    display: block !important;
+    max-width: 100% !important;
+  }
+
+  .card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border: 1px solid #999999 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    margin-bottom: 1.5rem !important;
+    background: #ffffff !important;
+  }
+
+  .card--popular {
+    border: 2px solid #000000 !important;
+    box-shadow: none !important;
+  }
+
+  .card__ribbon {
+    border: 1px solid #000000 !important;
+    background: #f0f0f0 !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+  }
+
+  .price-value, .card__title {
+    color: #000000 !important;
+  }
+
+  .comparison-section {
+    page-break-before: always;
+  }
+
+  .comparison-table {
+    border: 1px solid #cccccc !important;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    border: 1px solid #cccccc !important;
+    color: #000000 !important;
+  }
+}

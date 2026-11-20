@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#3b82f6">
+  <meta name="description" content="Commercial-grade, accessible, and responsive SaaS product pricing plans with transparent monthly and yearly billing in INR (₹).">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Responsive Product Pricing Cards | SaaS Tier Plans">
+  <meta property="og:description" content="Explore transparent, predictable pricing plans with annual discounts, instant feature comparison, and accessible controls.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%233b82f6'/><text y='65' x='50' text-anchor='middle' font-size='50' fill='white' font-family='sans-serif'>₹</text></svg>">
+
+  <title>Pricing Plans &amp; Tiers | High-Performance SaaS</title>
+
+  <!-- Inline Favicon Data URI -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%233b82f6'/><path d='M10 10h12M10 16h10M10 22h7' stroke='%23ffffff' stroke-width='3' stroke-linecap='round'/></svg>">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <!-- Accessible Skip Navigation Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Global Header -->
+  <header class="site-header" role="banner">
+    <div class="container site-header__inner">
+      <div class="site-brand">
+        <svg class="site-brand__logo" width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="currentColor"/>
+          <path d="M9 16L14 21L23 11" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>CloudPulse</span>
+      </div>
+
+      <!-- Theme Switcher Button -->
+      <button type="button" class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle dark/light theme">
+        <!-- Moon Icon (Visible in Light Mode) -->
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <!-- Sun Icon (Visible in Dark Mode) -->
+        <svg class="icon-sun hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Landmark -->
+  <main id="main-content" class="container">
+    
+    <!-- Pricing Section -->
+    <section class="pricing-section" aria-labelledby="pricing-title">
+      
+      <div class="pricing-hero">
+        <span class="badge-pill-pill">Flexible Pricing for Ambitious Teams</span>
+        <h2 id="pricing-title" class="pricing-hero__title">Simple, Transparent Pricing</h2>
+        <p class="pricing-hero__subtitle">Choose the perfect tier for your workflow. Switch plans anytime or save 20% with annual commitments.</p>
+
+        <!-- Billing Period Toggle Control -->
+        <div class="toggle-wrapper">
+          <div class="billing-toggle" role="group" aria-label="Billing period" data-active-period="monthly">
+            <span class="billing-toggle__pill" aria-hidden="true"></span>
+            
+            <button type="button" 
+                    id="billing-monthly" 
+                    class="billing-toggle__btn active" 
+                    data-period="monthly" 
+                    aria-pressed="true">
+              Monthly
+            </button>
+
+            <button type="button" 
+                    id="billing-yearly" 
+                    class="billing-toggle__btn" 
+                    data-period="yearly" 
+                    aria-pressed="false" 
+                    tabindex="-1">
+              <span>Yearly</span>
+              <span class="badge-discount" aria-label="Save 20 percent">Save 20%</span>
+            </button>
+          </div>
+
+          <!-- Screen Reader Live Announcement -->
+          <div id="billing-announcement" class="sr-only" aria-live="polite" aria-atomic="true">
+            Showing monthly prices
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing Cards Grid Container (Rendered dynamically via JS with No-JS static fallback) -->
+      <div class="pricing-grid" id="pricing-grid">
+        
+        <!-- Static / No-JS Pre-rendered Fallback (Starter) -->
+        <article class="card" id="card-starter-fallback">
+          <div class="card__header">
+            <h3 class="card__title">Starter</h3>
+            <p class="card__tagline">Essential tools for freelancers and side-project creators.</p>
+          </div>
+          <div class="card__price-box">
+            <div class="price-row">
+              <span class="price-value" data-monthly="499" data-yearly="4790">&#8377;499</span>
+              <span class="price-unit" data-monthly-text="/month" data-yearly-text="/year">/month</span>
+            </div>
+            <div class="savings-container">
+              <span class="strikethrough-original"><s>&#8377;5,988</s></span>
+              <span class="savings-pill">Save &#8377;1,198 (20%)</span>
+              <span class="effective-monthly">&#8776; &#8377;399/mo billed yearly</span>
+            </div>
+          </div>
+          <div class="card__cta-wrap">
+            <a href="#checkout-starter" class="btn btn--block btn--outline" aria-label="Get started with the Starter plan">Get Started</a>
+          </div>
+          <div class="card__features">
+            <p class="features-heading">Plan includes:</p>
+            <ul class="features-list" role="list">
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">Single project workspace</span>
+              </li>
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">Up to 5 team members</span>
+              </li>
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">5 GB cloud storage</span>
+              </li>
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">Standard email support (48h SLA)</span>
+              </li>
+              <li class="feature feature--excluded">
+                <svg class="feature__icon feature__icon--cross" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">Custom domain &amp; SSO</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Static Fallback (Pro) -->
+        <article class="card card--popular" id="card-pro-fallback">
+          <div class="card__ribbon card__ribbon--popular">
+            <span>Popular</span>
+          </div>
+          <div class="card__header">
+            <h3 class="card__title">Pro</h3>
+            <p class="card__tagline">Ideal for scaling businesses, fast-growing teams, and creators.</p>
+          </div>
+          <div class="card__price-box">
+            <div class="price-row">
+              <span class="price-value" data-monthly="999" data-yearly="9590">&#8377;999</span>
+              <span class="price-unit" data-monthly-text="/month" data-yearly-text="/year">/month</span>
+            </div>
+            <div class="savings-container">
+              <span class="strikethrough-original"><s>&#8377;11,988</s></span>
+              <span class="savings-pill">Save &#8377;2,398 (20%)</span>
+              <span class="effective-monthly">&#8776; &#8377;799/mo billed yearly</span>
+            </div>
+          </div>
+          <div class="card__cta-wrap">
+            <a href="#checkout-pro" class="btn btn--block btn--primary" aria-label="Start a 14-day free trial of the Pro plan">Start Pro Trial</a>
+          </div>
+          <div class="card__features">
+            <p class="features-heading">Plan includes:</p>
+            <ul class="features-list" role="list">
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">Unlimited active projects</span>
+              </li>
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">Up to 25 team members</span>
+              </li>
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">100 GB fast cloud storage</span>
+              </li>
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">Priority email &amp; chat support (4h SLA)</span>
+              </li>
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">Custom domains &amp; brand removal</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Static Fallback (Team) -->
+        <article class="card card--team" id="card-team-fallback">
+          <div class="card__ribbon card__ribbon--best-value">
+            <span>Best Value</span>
+          </div>
+          <div class="card__header">
+            <h3 class="card__title">Team</h3>
+            <p class="card__tagline">Maximized collaboration, compliance, and enterprise-grade power.</p>
+          </div>
+          <div class="card__price-box">
+            <div class="price-row">
+              <span class="price-value" data-monthly="2499" data-yearly="23990">&#8377;2,499</span>
+              <span class="price-unit" data-monthly-text="/month" data-yearly-text="/year">/month</span>
+            </div>
+            <div class="savings-container">
+              <span class="strikethrough-original"><s>&#8377;29,988</s></span>
+              <span class="savings-pill">Save &#8377;5,998 (20%)</span>
+              <span class="effective-monthly">&#8776; &#8377;1,999/mo billed yearly</span>
+            </div>
+          </div>
+          <div class="card__cta-wrap">
+            <a href="#checkout-team" class="btn btn--block btn--outline" aria-label="Contact sales team for the Team plan">Contact Sales</a>
+          </div>
+          <div class="card__features">
+            <p class="features-heading">Plan includes:</p>
+            <ul class="features-list" role="list">
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">Unlimited projects &amp; workspaces</span>
+              </li>
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">Unlimited team members</span>
+              </li>
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">1 TB enterprise storage + automated backups</span>
+              </li>
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">24/7 Dedicated account manager &amp; Slack</span>
+              </li>
+              <li class="feature feature--included">
+                <svg class="feature__icon feature__icon--check" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="feature__text">SAML / Okta SSO &amp; SOC2 Type II report</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Feature Comparison Table Section -->
+    <section class="comparison-section" aria-labelledby="comparison-title">
+      <h2 id="comparison-title" class="section-title">Compare Plan Specifications</h2>
+      <p class="section-subtitle">A granular breakdown of capabilities, resource limits, and security guarantees across each tier.</p>
+      
+      <div id="comparison-table-wrap">
+        <!-- Rendered by main.js with full semantic table markup -->
+      </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section class="faq-section" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="section-title">Frequently Asked Questions</h2>
+      <p class="section-subtitle">Everything you need to know about our billing, refunds, and subscription terms.</p>
+
+      <div class="faq-wrapper" id="faq-accordion-wrap">
+        <!-- Rendered by main.js using native <details>/<summary> -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>&copy; 2026 CloudPulse Technologies India Pvt. Ltd. All rights reserved. Prices indicated in Indian Rupees (₹).</p>
+    </div>
+  </footer>
+
+  <!-- Scripts (ES Module) -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
